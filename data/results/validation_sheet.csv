@@ -1,0 +1,242 @@
+row_num,bug_id,project,test_file,test_function,test_source,jisnu_label,suvarna_label,jisnu_notes,suvarna_notes
+1,PySnooper_3,PySnooper,tests/test_pysnooper.py,test_file_output,"def test_file_output():
+
+    with temp_file_tools.create_temp_folder(prefix='pysnooper') as folder:
+        path = folder / 'foo.log'
+        @pysnooper.snoop(str(path))
+        def my_function(foo):
+            x = 7
+            y = 8
+            return y + x
+        result = my_function('baba')
+        assert result == 15
+        output = path.open().read()
+        assert_output(
+            output,
+            (
+                VariableEntry('foo', value_regex=""u?'baba'""),
+                CallEntry(),
+                LineEntry('x = 7'),
+                VariableEntry('x', '7'),
+                LineEntry('y = 8'),
+                VariableEntry('y', '8'),
+                LineEntry('return y + x'),
+                ReturnEntry('return y + x'),
+            )
+        )
+",RETURN_VALUE,RETURN_VALUE,assert result == 15,assert result == 15
+2,ansible_10,ansible,test/units/modules/system/test_pamd.py,test_remove_last_rule,"    def test_remove_last_rule(self):
+        self.assertTrue(self.pamd.remove('session', 'required', 'pam_unix.so'))
+        test_rule = PamdRule('session', 'required', 'pam_unix.so')
+        self.assertNotIn(str(test_rule), str(self.pamd))
+",RETURN_VALUE,RETURN_VALUE,"assertTrue, assertNotIn",self.assertTrue
+3,ansible_10,ansible,test/units/modules/system/test_pamd.py,test_remove_first_rule,"    def test_remove_first_rule(self):
+        no_header_service = PamdService(self.no_header_system_auth_string)
+        self.assertTrue(no_header_service.remove('auth', 'required', 'pam_env.so'))
+        test_rule = PamdRule('auth', 'required', 'pam_env.so')
+        self.assertNotIn(str(test_rule), str(no_header_service))
+",RETURN_VALUE,RETURN_VALUE,Same pattern as above,self.assertTrue
+4,black_1,black,tests/test_black.py,test_works_in_mono_process_only_environment,"    def test_works_in_mono_process_only_environment(self, mock_executor) -> None:
+        mock_executor.side_effect = OSError()
+        mode = black.FileMode()
+        with cache_dir() as workspace:
+            one = (workspace / ""one.py"").resolve()
+            with one.open(""w"") as fobj:
+                fobj.write(""print('hello')"")
+            two = (workspace / ""two.py"").resolve()
+            with two.open(""w"") as fobj:
+                fobj.write(""print('hello')"")
+            black.write_cache({}, [one], mode)
+            self.invokeBlack([str(workspace)])
+            with one.open(""r"") as fobj:
+                self.assertEqual(fobj.read(), ""print('hello')"")
+            with two.open(""r"") as fobj:
+                self.assertEqual(fobj.read(), 'print(""hello"")\n')
+            cache = black.read_cache(mode)
+            self.assertIn(one, cache)
+            self.assertIn(two, cache)
+",BOUNDARY_CONDITION,RETURN_VALUE,"Classifier caught {} in write_cache({}, [one], mode) (empty dict). Incidental, not testing boundary behavior.","black.write_cache({}, [one], mode)"
+5,cookiecutter_3,cookiecutter,tests/test_read_user_choice.py,test_click_invocation,"def test_click_invocation(mocker, user_choice, expected_value):
+    choice = mocker.patch('click.Choice')
+    choice.return_value = click.Choice(OPTIONS)
+
+    prompt = mocker.patch('click.prompt')
+    prompt.return_value = '{}'.format(user_choice)
+
+    assert read_user_choice('varname', OPTIONS) == expected_value
+
+    prompt.assert_called_once_with(
+        EXPECTED_PROMPT,
+        type=click.Choice(OPTIONS),
+        default='1',
+        show_choices=False
+    )
+",BOUNDARY_CONDITION,BOUNDARY_CONDITION,Classifier caught False in show_choices=False (False==0 bug). Not a boundary test.,prompt.return_value = '{}'.format(user_choice)
+6,fastapi_12,fastapi,tests/test_security_http_bearer_optional.py,test_security_http_bearer_incorrect_scheme_credentials,"def test_security_http_bearer_incorrect_scheme_credentials():
+    response = client.get(""/users/me"", headers={""Authorization"": ""Basic notreally""})
+    assert response.status_code == 200
+    assert response.json() == {""msg"": ""Create an account first""}
+",RETURN_VALUE,RETURN_VALUE,Asserts on status code and json,assert
+7,httpie_2,httpie,tests/test_redirects.py,test_max_redirects,"    def test_max_redirects(self, httpbin):
+        r = http('--max-redirects=1', '--follow', httpbin.url + '/redirect/3',
+                 error_exit_ok=True)
+        assert r.exit_status == ExitStatus.ERROR_TOO_MANY_REDIRECTS
+",RETURN_VALUE,RETURN_VALUE,Asserts on exit status,assert
+8,keras_11,keras,tests/integration_tests/test_image_data_tasks.py,test_image_data_generator_training,"def test_image_data_generator_training():
+    np.random.seed(1337)
+    img_gen = ImageDataGenerator(rescale=1.)  # Dummy ImageDataGenerator
+    input_shape = (16, 16, 3)
+    (x_train, y_train), (x_test, y_test) = get_test_data(num_train=500,
+                                                         num_test=200,
+                                                         input_shape=input_shape,
+                                                         classification=True,
+                                                         num_classes=4)
+    y_train = to_categorical(y_train)
+    y_test = to_categorical(y_test)
+
+    model = Sequential([
+        layers.Conv2D(filters=8, kernel_size=3,
+                      activation='relu',
+                      input_shape=input_shape),
+        layers.MaxPooling2D(pool_size=2),
+        layers.Conv2D(filters=4, kernel_size=(3, 3),
+                      activation='relu', padding='same'),
+        layers.GlobalAveragePooling2D(),
+        layers.Dense(y_test.shape[-1], activation='softmax')
+    ])
+    model.compile(loss='categorical_crossentropy',
+                  optimizer='rmsprop',
+                  metrics=['accuracy'])
+    history = model.fit_generator(img_gen.flow(x_train, y_train, batch_size=16),
+                                  epochs=10,
+                                  validation_data=img_gen.flow(x_test, y_test,
+                                                               batch_size=16),
+                                  verbose=0)
+    assert history.history['val_acc'][-1] > 0.75
+    model.evaluate_generator(img_gen.flow(x_train, y_train, batch_size=16))
+",BOUNDARY_CONDITION,BOUNDARY_CONDITION,"Classifier caught 0 in verbose=0. Incidental, test is about training accuracy","layers.Dense(y_test.shape[-1], activation='softmax')"
+9,luigi_8,luigi,test/contrib/redshift_test.py,test_s3_copy_to_table,"    def test_s3_copy_to_table(self, mock_redshift_target, mock_copy):
+        task = DummyS3CopyToTableKey()
+        task.run()
+
+        # The mocked connection cursor passed to
+        # S3CopyToTable.copy(self, cursor, f).
+        mock_cursor = (mock_redshift_target.return_value
+                                           .connect
+                                           .return_value
+                                           .cursor
+                                           .return_value)
+
+        # `mock_redshift_target` is the mocked `RedshiftTarget` object
+        # returned by S3CopyToTable.output(self).
+        mock_redshift_target.assert_called_with(database=task.database,
+                                                host=task.host,
+                                                update_id=task.task_id,
+                                                user=task.user,
+                                                table=task.table,
+                                                password=task.password)
+
+        # Check if the `S3CopyToTable.s3_load_path` class attribute was
+        # successfully referenced in the `S3CopyToTable.run` method, which is
+        # in-turn passed to `S3CopyToTable.copy` and other functions in `run`
+        # (see issue #995).
+        mock_copy.assert_called_with(mock_cursor, task.s3_load_path())
+
+        # Check the SQL query in `S3CopyToTable.does_table_exist`.
+        mock_cursor.execute.assert_called_with(""select 1 as table_exists ""
+                                               ""from pg_table_def ""
+                                               ""where tablename = lower(%s) limit 1"",
+                                               (task.table,))
+
+        return
+",RETURN_VALUE,OTHER,Asserts on mock calls,"NOT SURE IF ASSERT_CALLED_WITH 
+IS COUNTED AS TESTING ASSERTS ON A 
+RETURN VALUE"
+10,matplotlib_10,matplotlib,lib/matplotlib/tests/test_axes.py,test_offset_text_visible,"def test_offset_text_visible():
+    fig = plt.figure()
+    ax = fig.add_subplot(1, 1, 1)
+    ax.plot([1.01e9, 1.02e9, 1.03e9])
+    ax.yaxis.set_tick_params(label1On=False, label2On=True)
+    assert ax.yaxis.get_offset_text().get_visible()
+    ax.yaxis.set_tick_params(label2On=False)
+    assert not ax.yaxis.get_offset_text().get_visible()
+",BOUNDARY_CONDITION,RETURN_VALUE,Classifier caught False in label1On=False (False==0 bug). Test is about visibility toggling.,assert
+11,pandas_5,pandas,pandas/tests/groupby/test_function.py,test_ops_not_as_index,"def test_ops_not_as_index(reduction_func):
+    # GH 10355
+    # Using as_index=False should not modify grouped column
+
+    if reduction_func in (""nth"", ""ngroup"", ""size"",):
+        pytest.skip(""Skip until behavior is determined (GH #5755)"")
+
+    if reduction_func in (""corrwith"", ""idxmax"", ""idxmin"", ""mad"", ""nunique"", ""skew"",):
+        pytest.xfail(
+            ""_GroupBy._python_apply_general incorrectly modifies grouping columns""
+        )
+
+    df = DataFrame(np.random.randint(0, 5, size=(100, 2)), columns=[""a"", ""b""])
+    expected = getattr(df.groupby(""a""), reduction_func)().reset_index()
+
+    result = getattr(df.groupby(""a"", as_index=False), reduction_func)()
+    tm.assert_frame_equal(result, expected)
+
+    result = getattr(df.groupby(""a"", as_index=False)[""b""], reduction_func)()
+    tm.assert_frame_equal(result, expected)
+",BOUNDARY_CONDITION,EXCEPTION_HANDLING,"Classifier caught 0 in randint(0, 5, ...). Incidental, test is about as_index=False groupby behavior.",pytest.skip
+12,sanic_5,sanic,tests/test_logging.py,test_logging_modified_root_logger_config,"def test_logging_modified_root_logger_config():
+    reset_logging()
+
+    modified_config = LOGGING_CONFIG_DEFAULTS
+    modified_config['loggers']['sanic.root']['level'] = 'DEBUG'
+
+    app = Sanic(""test_logging"", log_config=modified_config)
+
+    assert logging.getLogger('sanic.root').getEffectiveLevel() == logging.DEBUG
+",RETURN_VALUE,RETURN_VALUE,Asserts on log level,assert
+13,scrapy_15,scrapy,tests/test_utils_url.py,test_canonicalize_url_idna_exceptions,"    def test_canonicalize_url_idna_exceptions(self):
+        # missing DNS label
+        self.assertEqual(
+            canonicalize_url(u""http://.example.com/résumé?q=résumé""),
+            ""http://.example.com/r%C3%A9sum%C3%A9?q=r%C3%A9sum%C3%A9"")
+
+        # DNS label too long
+        self.assertEqual(
+            canonicalize_url(
+                u""http://www.{label}.com/résumé?q=résumé"".format(
+                    label=u""example""*11)),
+            ""http://www.{label}.com/r%C3%A9sum%C3%A9?q=r%C3%A9sum%C3%A9"".format(
+                    label=u""example""*11))
+",RETURN_VALUE,RETURN_VALUE,Asserts URL canonicalization output,assert equal
+14,spacy_9,spacy,spacy/tests/pipeline/test_tagger.py,test_tagger_warns_no_lemma_lookups,"def test_tagger_warns_no_lemma_lookups():
+    nlp = English()
+    nlp.vocab.lookups = Lookups()
+    assert not len(nlp.vocab.lookups)
+    tagger = nlp.create_pipe(""tagger"")
+    with pytest.warns(UserWarning):
+        tagger.begin_training()
+    nlp.add_pipe(tagger)
+    with pytest.warns(UserWarning):
+        nlp.begin_training()
+    nlp.vocab.lookups.add_table(""lemma_lookup"")
+    with pytest.warns(None) as record:
+        nlp.begin_training()
+        assert not record.list
+",NONE_NULL_HANDLING,RETURN_VALUE,pytest.warns(None) contains None literal,assert not
+15,thefuck_2,thefuck,tests/test_utils.py,test_get_all_executables_pathsep,"def test_get_all_executables_pathsep(path, pathsep):
+    with patch('thefuck.utils.Path') as Path_mock:
+        get_all_executables()
+        Path_mock.assert_has_calls([call(p) for p in path.split(pathsep)], True)
+",RETURN_VALUE,RETURN_VALUE,asserts on mock calls,assert
+16,ansible_12,ansible,test/units/plugins/lookup/test_env.py,test_env_var_value,"def test_env_var_value(monkeypatch, env_var, exp_value):
+    monkeypatch.setattr('ansible.utils.py3compat.environ.get', lambda x, y: exp_value)
+
+    env_lookup = lookup_loader.get('env')
+    retval = env_lookup.run([env_var], None)
+    assert retval == [exp_value]
+",NONE_NULL_HANDLING,NONE_NULL_HANDLING,"env_lookup.run([env_var], None) passes None",None
+17,ansible_12,ansible,test/units/plugins/lookup/test_env.py,test_utf8_env_var_value,"def test_utf8_env_var_value(monkeypatch, env_var, exp_value):
+    monkeypatch.setattr('ansible.utils.py3compat.environ.get', lambda x, y: exp_value)
+
+    env_lookup = lookup_loader.get('env')
+    retval = env_lookup.run([env_var], None)
+    assert retval == [exp_value]
+",NONE_NULL_HANDLING,NONE_NULL_HANDLING,Same none pattern as the above bug,None

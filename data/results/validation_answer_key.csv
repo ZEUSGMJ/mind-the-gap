@@ -1,0 +1,18 @@
+row_num,bug_id,test_function,assigned_gap_type,priority_matched,rule_explanation
+1,PySnooper_3,test_file_output,RETURN_VALUE,5,RETURN_VALUE: asserts on a specific return value
+2,ansible_10,test_remove_last_rule,RETURN_VALUE,5,RETURN_VALUE: asserts on a specific return value
+3,ansible_10,test_remove_first_rule,RETURN_VALUE,5,RETURN_VALUE: asserts on a specific return value
+4,black_1,test_works_in_mono_process_only_environment,BOUNDARY_CONDITION,2,"BOUNDARY_CONDITION: inputs include 0, -1, sys.maxsize, float('inf'), empty [], {}, """", b"""""
+5,cookiecutter_3,test_click_invocation,RETURN_VALUE,5,RETURN_VALUE: asserts on a specific return value
+6,fastapi_12,test_security_http_bearer_incorrect_scheme_credentials,RETURN_VALUE,5,RETURN_VALUE: asserts on a specific return value
+7,httpie_2,test_max_redirects,RETURN_VALUE,5,RETURN_VALUE: asserts on a specific return value
+8,keras_11,test_image_data_generator_training,BOUNDARY_CONDITION,2,"BOUNDARY_CONDITION: inputs include 0, -1, sys.maxsize, float('inf'), empty [], {}, """", b"""""
+9,luigi_8,test_s3_copy_to_table,RETURN_VALUE,5,RETURN_VALUE: asserts on a specific return value
+10,matplotlib_10,test_offset_text_visible,RETURN_VALUE,5,RETURN_VALUE: asserts on a specific return value
+11,pandas_5,test_ops_not_as_index,BOUNDARY_CONDITION,2,"BOUNDARY_CONDITION: inputs include 0, -1, sys.maxsize, float('inf'), empty [], {}, """", b"""""
+12,sanic_5,test_logging_modified_root_logger_config,RETURN_VALUE,5,RETURN_VALUE: asserts on a specific return value
+13,scrapy_15,test_canonicalize_url_idna_exceptions,RETURN_VALUE,5,RETURN_VALUE: asserts on a specific return value
+14,spacy_9,test_tagger_warns_no_lemma_lookups,NONE_NULL_HANDLING,4,NONE_NULL_HANDLING: inputs or assertions involve None or NaN
+15,thefuck_2,test_get_all_executables_pathsep,RETURN_VALUE,5,RETURN_VALUE: asserts on a specific return value
+16,ansible_12,test_env_var_value,NONE_NULL_HANDLING,4,NONE_NULL_HANDLING: inputs or assertions involve None or NaN
+17,ansible_12,test_utf8_env_var_value,NONE_NULL_HANDLING,4,NONE_NULL_HANDLING: inputs or assertions involve None or NaN

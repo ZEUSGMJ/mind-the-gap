@@ -1,0 +1,102 @@
+============================================================
+MIND THE GAP: ANALYSIS SUMMARY
+============================================================
+
+Total trigger tests analyzed: 211
+Total bugs: 139
+Projects: 14
+
+--- Gap Type Distribution ---
+  RETURN_VALUE                94  ( 44.5%)
+  BOUNDARY_CONDITION          60  ( 28.4%)
+  NONE_NULL_HANDLING          32  ( 15.2%)
+  EXCEPTION_HANDLING          15  (  7.1%)
+  OTHER                       10  (  4.7%)
+
+--- Structural Metrics by Gap Type (mean / median) ---
+
+  BOUNDARY_CONDITION
+    loc                            mean=13.92  median=11.50  n=60
+    assertion_count                mean=2.55  median=1.50  n=60
+    cyclomatic_complexity          mean=3.23  median=2.00  n=60
+    fixture_count                  mean=0.60  median=0.00  n=60
+    fix_loc_added                  mean=13.64  median=7.00  n=45
+    fix_loc_deleted                mean=5.20  median=3.00  n=45
+    fix_files_changed              mean=1.51  median=1.00  n=45
+
+  EXCEPTION_HANDLING
+    loc                            mean=35.40  median=8.00  n=15
+    assertion_count                mean=6.27  median=1.00  n=15
+    cyclomatic_complexity          mean=7.33  median=2.00  n=15
+    fixture_count                  mean=0.80  median=1.00  n=15
+    fix_loc_added                  mean=6.22  median=5.00  n=9
+    fix_loc_deleted                mean=2.33  median=1.00  n=9
+    fix_files_changed              mean=1.67  median=2.00  n=9
+
+  NONE_NULL_HANDLING
+    loc                            mean=9.03  median=6.50  n=32
+    assertion_count                mean=2.06  median=1.00  n=32
+    cyclomatic_complexity          mean=1.88  median=1.50  n=32
+    fixture_count                  mean=0.50  median=0.00  n=32
+    fix_loc_added                  mean=16.67  median=9.00  n=24
+    fix_loc_deleted                mean=12.33  median=3.00  n=24
+    fix_files_changed              mean=1.46  median=1.00  n=24
+
+  OTHER
+    loc                            mean=8.10  median=7.50  n=10
+    assertion_count                mean=0.00  median=0.00  n=10
+    cyclomatic_complexity          mean=1.00  median=1.00  n=10
+    fixture_count                  mean=0.30  median=0.00  n=10
+    fix_loc_added                  mean=23.00  median=5.50  n=6
+    fix_loc_deleted                mean=3.17  median=1.00  n=6
+    fix_files_changed              mean=1.17  median=1.00  n=6
+
+  RETURN_VALUE
+    loc                            mean=8.74  median=6.00  n=94
+    assertion_count                mean=2.01  median=2.00  n=94
+    cyclomatic_complexity          mean=2.47  median=2.00  n=94
+    fixture_count                  mean=0.36  median=0.00  n=94
+    fix_loc_added                  mean=10.14  median=4.00  n=55
+    fix_loc_deleted                mean=3.36  median=2.00  n=55
+    fix_files_changed              mean=1.36  median=1.00  n=55
+
+--- Mann-Whitney U (significant pairs, p < 0.05) ---
+
+  loc
+    BOUNDARY_CONDITION_vs_NONE_NULL_HANDLING           U=1262.0  p=0.013245
+    BOUNDARY_CONDITION_vs_RETURN_VALUE                 U=3942.5  p=2.9e-05
+
+  assertion_count
+    BOUNDARY_CONDITION_vs_OTHER                        U=550.0  p=1.7e-05
+    EXCEPTION_HANDLING_vs_OTHER                        U=135.0  p=0.000285
+    EXCEPTION_HANDLING_vs_RETURN_VALUE                 U=496.0  p=0.049758
+    NONE_NULL_HANDLING_vs_OTHER                        U=310.0  p=4e-06
+    OTHER_vs_RETURN_VALUE                              U=0.0  p=0.0
+
+  cyclomatic_complexity
+    BOUNDARY_CONDITION_vs_NONE_NULL_HANDLING           U=1190.0  p=0.049112
+    BOUNDARY_CONDITION_vs_OTHER                        U=495.0  p=0.000583
+    EXCEPTION_HANDLING_vs_NONE_NULL_HANDLING           U=323.5  p=0.044261
+    EXCEPTION_HANDLING_vs_OTHER                        U=140.0  p=9.8e-05
+    NONE_NULL_HANDLING_vs_OTHER                        U=240.0  p=0.006797
+    NONE_NULL_HANDLING_vs_RETURN_VALUE                 U=1116.0  p=0.023353
+    OTHER_vs_RETURN_VALUE                              U=135.0  p=0.000114
+
+  fixture_count
+    BOUNDARY_CONDITION_vs_RETURN_VALUE                 U=3354.0  p=0.013417
+    EXCEPTION_HANDLING_vs_NONE_NULL_HANDLING           U=331.0  p=0.015165
+    EXCEPTION_HANDLING_vs_RETURN_VALUE                 U=992.0  p=0.001287
+
+  fix_loc_added
+    NONE_NULL_HANDLING_vs_RETURN_VALUE                 U=852.0  p=0.040403
+
+  fix_loc_deleted
+    BOUNDARY_CONDITION_vs_RETURN_VALUE                 U=1521.5  p=0.04384
+    NONE_NULL_HANDLING_vs_OTHER                        U=110.0  p=0.048287
+    NONE_NULL_HANDLING_vs_RETURN_VALUE                 U=861.0  p=0.026772
+
+--- Inter-Rater Agreement ---
+  phi3:mini                           kappa=0.2062  agreement=40.8%  (n=211)
+  claude-haiku-4-5-20251001           kappa=0.2135  agreement=47.9%  (n=211)
+
+============================================================

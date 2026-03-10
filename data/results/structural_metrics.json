@@ -1,0 +1,222 @@
+{
+  "BOUNDARY_CONDITION": {
+    "loc": {
+      "mean": 13.917,
+      "median": 11.5,
+      "std": 9.138,
+      "n": 60
+    },
+    "assertion_count": {
+      "mean": 2.55,
+      "median": 1.5,
+      "std": 3.342,
+      "n": 60
+    },
+    "cyclomatic_complexity": {
+      "mean": 3.233,
+      "median": 2.0,
+      "std": 3.534,
+      "n": 60
+    },
+    "fixture_count": {
+      "mean": 0.6,
+      "median": 0.0,
+      "std": 0.867,
+      "n": 60
+    },
+    "fix_loc_added": {
+      "mean": 13.644,
+      "median": 7.0,
+      "std": 18.507,
+      "n": 45
+    },
+    "fix_loc_deleted": {
+      "mean": 5.2,
+      "median": 3.0,
+      "std": 5.643,
+      "n": 45
+    },
+    "fix_files_changed": {
+      "mean": 1.511,
+      "median": 1.0,
+      "std": 0.869,
+      "n": 45
+    }
+  },
+  "EXCEPTION_HANDLING": {
+    "loc": {
+      "mean": 35.4,
+      "median": 8.0,
+      "std": 93.094,
+      "n": 15
+    },
+    "assertion_count": {
+      "mean": 6.267,
+      "median": 1.0,
+      "std": 11.279,
+      "n": 15
+    },
+    "cyclomatic_complexity": {
+      "mean": 7.333,
+      "median": 2.0,
+      "std": 11.242,
+      "n": 15
+    },
+    "fixture_count": {
+      "mean": 0.8,
+      "median": 1.0,
+      "std": 0.775,
+      "n": 15
+    },
+    "fix_loc_added": {
+      "mean": 6.222,
+      "median": 5.0,
+      "std": 5.54,
+      "n": 9
+    },
+    "fix_loc_deleted": {
+      "mean": 2.333,
+      "median": 1.0,
+      "std": 2.872,
+      "n": 9
+    },
+    "fix_files_changed": {
+      "mean": 1.667,
+      "median": 2.0,
+      "std": 0.707,
+      "n": 9
+    }
+  },
+  "NONE_NULL_HANDLING": {
+    "loc": {
+      "mean": 9.031,
+      "median": 6.5,
+      "std": 5.823,
+      "n": 32
+    },
+    "assertion_count": {
+      "mean": 2.062,
+      "median": 1.0,
+      "std": 1.95,
+      "n": 32
+    },
+    "cyclomatic_complexity": {
+      "mean": 1.875,
+      "median": 1.5,
+      "std": 1.185,
+      "n": 32
+    },
+    "fixture_count": {
+      "mean": 0.5,
+      "median": 0.0,
+      "std": 1.164,
+      "n": 32
+    },
+    "fix_loc_added": {
+      "mean": 16.667,
+      "median": 9.0,
+      "std": 23.732,
+      "n": 24
+    },
+    "fix_loc_deleted": {
+      "mean": 12.333,
+      "median": 3.0,
+      "std": 35.894,
+      "n": 24
+    },
+    "fix_files_changed": {
+      "mean": 1.458,
+      "median": 1.0,
+      "std": 0.884,
+      "n": 24
+    }
+  },
+  "OTHER": {
+    "loc": {
+      "mean": 8.1,
+      "median": 7.5,
+      "std": 5.065,
+      "n": 10
+    },
+    "assertion_count": {
+      "mean": 0.0,
+      "median": 0.0,
+      "std": 0.0,
+      "n": 10
+    },
+    "cyclomatic_complexity": {
+      "mean": 1.0,
+      "median": 1.0,
+      "std": 0.0,
+      "n": 10
+    },
+    "fixture_count": {
+      "mean": 0.3,
+      "median": 0.0,
+      "std": 0.675,
+      "n": 10
+    },
+    "fix_loc_added": {
+      "mean": 23.0,
+      "median": 5.5,
+      "std": 41.487,
+      "n": 6
+    },
+    "fix_loc_deleted": {
+      "mean": 3.167,
+      "median": 1.0,
+      "std": 6.306,
+      "n": 6
+    },
+    "fix_files_changed": {
+      "mean": 1.167,
+      "median": 1.0,
+      "std": 0.408,
+      "n": 6
+    }
+  },
+  "RETURN_VALUE": {
+    "loc": {
+      "mean": 8.745,
+      "median": 6.0,
+      "std": 8.298,
+      "n": 94
+    },
+    "assertion_count": {
+      "mean": 2.011,
+      "median": 2.0,
+      "std": 1.356,
+      "n": 94
+    },
+    "cyclomatic_complexity": {
+      "mean": 2.468,
+      "median": 2.0,
+      "std": 1.598,
+      "n": 94
+    },
+    "fixture_count": {
+      "mean": 0.362,
+      "median": 0.0,
+      "std": 0.801,
+      "n": 94
+    },
+    "fix_loc_added": {
+      "mean": 10.145,
+      "median": 4.0,
+      "std": 20.798,
+      "n": 55
+    },
+    "fix_loc_deleted": {
+      "mean": 3.364,
+      "median": 2.0,
+      "std": 5.765,
+      "n": 55
+    },
+    "fix_files_changed": {
+      "mean": 1.364,
+      "median": 1.0,
+      "std": 0.704,
+      "n": 55
+    }
+  }
+}

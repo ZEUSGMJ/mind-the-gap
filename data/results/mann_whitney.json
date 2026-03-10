@@ -1,0 +1,366 @@
+{
+  "loc": {
+    "BOUNDARY_CONDITION_vs_EXCEPTION_HANDLING": {
+      "U": 505.0,
+      "p_value": 0.469615,
+      "significant": false
+    },
+    "BOUNDARY_CONDITION_vs_NONE_NULL_HANDLING": {
+      "U": 1262.0,
+      "p_value": 0.013245,
+      "significant": true
+    },
+    "BOUNDARY_CONDITION_vs_OTHER": {
+      "U": 416.5,
+      "p_value": 0.051108,
+      "significant": false
+    },
+    "BOUNDARY_CONDITION_vs_RETURN_VALUE": {
+      "U": 3942.5,
+      "p_value": 2.9e-05,
+      "significant": true
+    },
+    "EXCEPTION_HANDLING_vs_NONE_NULL_HANDLING": {
+      "U": 284.5,
+      "p_value": 0.311297,
+      "significant": false
+    },
+    "EXCEPTION_HANDLING_vs_OTHER": {
+      "U": 92.0,
+      "p_value": 0.356801,
+      "significant": false
+    },
+    "EXCEPTION_HANDLING_vs_RETURN_VALUE": {
+      "U": 902.5,
+      "p_value": 0.079272,
+      "significant": false
+    },
+    "NONE_NULL_HANDLING_vs_OTHER": {
+      "U": 168.5,
+      "p_value": 0.811591,
+      "significant": false
+    },
+    "NONE_NULL_HANDLING_vs_RETURN_VALUE": {
+      "U": 1799.5,
+      "p_value": 0.095078,
+      "significant": false
+    },
+    "OTHER_vs_RETURN_VALUE": {
+      "U": 500.0,
+      "p_value": 0.741479,
+      "significant": false
+    }
+  },
+  "assertion_count": {
+    "BOUNDARY_CONDITION_vs_EXCEPTION_HANDLING": {
+      "U": 508.5,
+      "p_value": 0.427018,
+      "significant": false
+    },
+    "BOUNDARY_CONDITION_vs_NONE_NULL_HANDLING": {
+      "U": 927.0,
+      "p_value": 0.782461,
+      "significant": false
+    },
+    "BOUNDARY_CONDITION_vs_OTHER": {
+      "U": 550.0,
+      "p_value": 1.7e-05,
+      "significant": true
+    },
+    "BOUNDARY_CONDITION_vs_RETURN_VALUE": {
+      "U": 2615.0,
+      "p_value": 0.426107,
+      "significant": false
+    },
+    "EXCEPTION_HANDLING_vs_NONE_NULL_HANDLING": {
+      "U": 193.5,
+      "p_value": 0.260826,
+      "significant": false
+    },
+    "EXCEPTION_HANDLING_vs_OTHER": {
+      "U": 135.0,
+      "p_value": 0.000285,
+      "significant": true
+    },
+    "EXCEPTION_HANDLING_vs_RETURN_VALUE": {
+      "U": 496.0,
+      "p_value": 0.049758,
+      "significant": true
+    },
+    "NONE_NULL_HANDLING_vs_OTHER": {
+      "U": 310.0,
+      "p_value": 4e-06,
+      "significant": true
+    },
+    "NONE_NULL_HANDLING_vs_RETURN_VALUE": {
+      "U": 1451.5,
+      "p_value": 0.756624,
+      "significant": false
+    },
+    "OTHER_vs_RETURN_VALUE": {
+      "U": 0.0,
+      "p_value": 0.0,
+      "significant": true
+    }
+  },
+  "cyclomatic_complexity": {
+    "BOUNDARY_CONDITION_vs_EXCEPTION_HANDLING": {
+      "U": 403.0,
+      "p_value": 0.524391,
+      "significant": false
+    },
+    "BOUNDARY_CONDITION_vs_NONE_NULL_HANDLING": {
+      "U": 1190.0,
+      "p_value": 0.049112,
+      "significant": true
+    },
+    "BOUNDARY_CONDITION_vs_OTHER": {
+      "U": 495.0,
+      "p_value": 0.000583,
+      "significant": true
+    },
+    "BOUNDARY_CONDITION_vs_RETURN_VALUE": {
+      "U": 2878.5,
+      "p_value": 0.824159,
+      "significant": false
+    },
+    "EXCEPTION_HANDLING_vs_NONE_NULL_HANDLING": {
+      "U": 323.5,
+      "p_value": 0.044261,
+      "significant": true
+    },
+    "EXCEPTION_HANDLING_vs_OTHER": {
+      "U": 140.0,
+      "p_value": 9.8e-05,
+      "significant": true
+    },
+    "EXCEPTION_HANDLING_vs_RETURN_VALUE": {
+      "U": 742.5,
+      "p_value": 0.73468,
+      "significant": false
+    },
+    "NONE_NULL_HANDLING_vs_OTHER": {
+      "U": 240.0,
+      "p_value": 0.006797,
+      "significant": true
+    },
+    "NONE_NULL_HANDLING_vs_RETURN_VALUE": {
+      "U": 1116.0,
+      "p_value": 0.023353,
+      "significant": true
+    },
+    "OTHER_vs_RETURN_VALUE": {
+      "U": 135.0,
+      "p_value": 0.000114,
+      "significant": true
+    }
+  },
+  "fixture_count": {
+    "BOUNDARY_CONDITION_vs_EXCEPTION_HANDLING": {
+      "U": 362.5,
+      "p_value": 0.199366,
+      "significant": false
+    },
+    "BOUNDARY_CONDITION_vs_NONE_NULL_HANDLING": {
+      "U": 1120.0,
+      "p_value": 0.121223,
+      "significant": false
+    },
+    "BOUNDARY_CONDITION_vs_OTHER": {
+      "U": 361.5,
+      "p_value": 0.237241,
+      "significant": false
+    },
+    "BOUNDARY_CONDITION_vs_RETURN_VALUE": {
+      "U": 3354.0,
+      "p_value": 0.013417,
+      "significant": true
+    },
+    "EXCEPTION_HANDLING_vs_NONE_NULL_HANDLING": {
+      "U": 331.0,
+      "p_value": 0.015165,
+      "significant": true
+    },
+    "EXCEPTION_HANDLING_vs_OTHER": {
+      "U": 106.5,
+      "p_value": 0.054016,
+      "significant": false
+    },
+    "EXCEPTION_HANDLING_vs_RETURN_VALUE": {
+      "U": 992.0,
+      "p_value": 0.001287,
+      "significant": true
+    },
+    "NONE_NULL_HANDLING_vs_OTHER": {
+      "U": 165.0,
+      "p_value": 0.852968,
+      "significant": false
+    },
+    "NONE_NULL_HANDLING_vs_RETURN_VALUE": {
+      "U": 1527.5,
+      "p_value": 0.857221,
+      "significant": false
+    },
+    "OTHER_vs_RETURN_VALUE": {
+      "U": 462.5,
+      "p_value": 0.913774,
+      "significant": false
+    }
+  },
+  "fix_loc_added": {
+    "BOUNDARY_CONDITION_vs_EXCEPTION_HANDLING": {
+      "U": 235.5,
+      "p_value": 0.449305,
+      "significant": false
+    },
+    "BOUNDARY_CONDITION_vs_NONE_NULL_HANDLING": {
+      "U": 500.5,
+      "p_value": 0.62223,
+      "significant": false
+    },
+    "BOUNDARY_CONDITION_vs_OTHER": {
+      "U": 139.5,
+      "p_value": 0.906612,
+      "significant": false
+    },
+    "BOUNDARY_CONDITION_vs_RETURN_VALUE": {
+      "U": 1466.0,
+      "p_value": 0.112629,
+      "significant": false
+    },
+    "EXCEPTION_HANDLING_vs_NONE_NULL_HANDLING": {
+      "U": 73.5,
+      "p_value": 0.167899,
+      "significant": false
+    },
+    "EXCEPTION_HANDLING_vs_OTHER": {
+      "U": 24.0,
+      "p_value": 0.76747,
+      "significant": false
+    },
+    "EXCEPTION_HANDLING_vs_RETURN_VALUE": {
+      "U": 260.0,
+      "p_value": 0.815782,
+      "significant": false
+    },
+    "NONE_NULL_HANDLING_vs_OTHER": {
+      "U": 80.0,
+      "p_value": 0.696708,
+      "significant": false
+    },
+    "NONE_NULL_HANDLING_vs_RETURN_VALUE": {
+      "U": 852.0,
+      "p_value": 0.040403,
+      "significant": true
+    },
+    "OTHER_vs_RETURN_VALUE": {
+      "U": 188.5,
+      "p_value": 0.575297,
+      "significant": false
+    }
+  },
+  "fix_loc_deleted": {
+    "BOUNDARY_CONDITION_vs_EXCEPTION_HANDLING": {
+      "U": 270.5,
+      "p_value": 0.113916,
+      "significant": false
+    },
+    "BOUNDARY_CONDITION_vs_NONE_NULL_HANDLING": {
+      "U": 508.0,
+      "p_value": 0.688903,
+      "significant": false
+    },
+    "BOUNDARY_CONDITION_vs_OTHER": {
+      "U": 194.0,
+      "p_value": 0.08374,
+      "significant": false
+    },
+    "BOUNDARY_CONDITION_vs_RETURN_VALUE": {
+      "U": 1521.5,
+      "p_value": 0.04384,
+      "significant": true
+    },
+    "EXCEPTION_HANDLING_vs_NONE_NULL_HANDLING": {
+      "U": 63.5,
+      "p_value": 0.072261,
+      "significant": false
+    },
+    "EXCEPTION_HANDLING_vs_OTHER": {
+      "U": 30.0,
+      "p_value": 0.759795,
+      "significant": false
+    },
+    "EXCEPTION_HANDLING_vs_RETURN_VALUE": {
+      "U": 206.5,
+      "p_value": 0.413611,
+      "significant": false
+    },
+    "NONE_NULL_HANDLING_vs_OTHER": {
+      "U": 110.0,
+      "p_value": 0.048287,
+      "significant": true
+    },
+    "NONE_NULL_HANDLING_vs_RETURN_VALUE": {
+      "U": 861.0,
+      "p_value": 0.026772,
+      "significant": true
+    },
+    "OTHER_vs_RETURN_VALUE": {
+      "U": 98.5,
+      "p_value": 0.091067,
+      "significant": false
+    }
+  },
+  "fix_files_changed": {
+    "BOUNDARY_CONDITION_vs_EXCEPTION_HANDLING": {
+      "U": 165.5,
+      "p_value": 0.323174,
+      "significant": false
+    },
+    "BOUNDARY_CONDITION_vs_NONE_NULL_HANDLING": {
+      "U": 554.0,
+      "p_value": 0.837875,
+      "significant": false
+    },
+    "BOUNDARY_CONDITION_vs_OTHER": {
+      "U": 160.5,
+      "p_value": 0.371386,
+      "significant": false
+    },
+    "BOUNDARY_CONDITION_vs_RETURN_VALUE": {
+      "U": 1331.5,
+      "p_value": 0.420807,
+      "significant": false
+    },
+    "EXCEPTION_HANDLING_vs_NONE_NULL_HANDLING": {
+      "U": 133.0,
+      "p_value": 0.249936,
+      "significant": false
+    },
+    "EXCEPTION_HANDLING_vs_OTHER": {
+      "U": 38.0,
+      "p_value": 0.153042,
+      "significant": false
+    },
+    "EXCEPTION_HANDLING_vs_RETURN_VALUE": {
+      "U": 316.5,
+      "p_value": 0.103324,
+      "significant": false
+    },
+    "NONE_NULL_HANDLING_vs_OTHER": {
+      "U": 84.5,
+      "p_value": 0.436275,
+      "significant": false
+    },
+    "NONE_NULL_HANDLING_vs_RETURN_VALUE": {
+      "U": 697.0,
+      "p_value": 0.62398,
+      "significant": false
+    },
+    "OTHER_vs_RETURN_VALUE": {
+      "U": 146.0,
+      "p_value": 0.559357,
+      "significant": false
+    }
+  }
+}

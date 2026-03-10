@@ -1,0 +1,94 @@
+{
+  "comparisons": [
+    {
+      "rater_a": "ast_classifier",
+      "rater_b": "jisnu",
+      "n": 17,
+      "agreed": 15,
+      "agreement_pct": 88.2,
+      "kappa": 0.7952,
+      "disagreements": [
+        {
+          "index": 4,
+          "ast_classifier": "RETURN_VALUE",
+          "jisnu": "BOUNDARY_CONDITION"
+        },
+        {
+          "index": 9,
+          "ast_classifier": "RETURN_VALUE",
+          "jisnu": "BOUNDARY_CONDITION"
+        }
+      ]
+    },
+    {
+      "rater_a": "ast_classifier",
+      "rater_b": "suvarna",
+      "n": 17,
+      "agreed": 12,
+      "agreement_pct": 70.6,
+      "kappa": 0.4551,
+      "disagreements": [
+        {
+          "index": 3,
+          "ast_classifier": "BOUNDARY_CONDITION",
+          "suvarna": "RETURN_VALUE"
+        },
+        {
+          "index": 4,
+          "ast_classifier": "RETURN_VALUE",
+          "suvarna": "BOUNDARY_CONDITION"
+        },
+        {
+          "index": 8,
+          "ast_classifier": "RETURN_VALUE",
+          "suvarna": "OTHER"
+        },
+        {
+          "index": 10,
+          "ast_classifier": "BOUNDARY_CONDITION",
+          "suvarna": "EXCEPTION_HANDLING"
+        },
+        {
+          "index": 13,
+          "ast_classifier": "NONE_NULL_HANDLING",
+          "suvarna": "RETURN_VALUE"
+        }
+      ]
+    },
+    {
+      "rater_a": "jisnu",
+      "rater_b": "suvarna",
+      "n": 17,
+      "agreed": 12,
+      "agreement_pct": 70.6,
+      "kappa": 0.5115,
+      "disagreements": [
+        {
+          "index": 3,
+          "jisnu": "BOUNDARY_CONDITION",
+          "suvarna": "RETURN_VALUE"
+        },
+        {
+          "index": 8,
+          "jisnu": "RETURN_VALUE",
+          "suvarna": "OTHER"
+        },
+        {
+          "index": 9,
+          "jisnu": "BOUNDARY_CONDITION",
+          "suvarna": "RETURN_VALUE"
+        },
+        {
+          "index": 10,
+          "jisnu": "BOUNDARY_CONDITION",
+          "suvarna": "EXCEPTION_HANDLING"
+        },
+        {
+          "index": 13,
+          "jisnu": "NONE_NULL_HANDLING",
+          "suvarna": "RETURN_VALUE"
+        }
+      ]
+    }
+  ]
+}

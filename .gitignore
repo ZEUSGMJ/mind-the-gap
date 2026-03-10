@@ -1,0 +1,10 @@
+venv/
+data/raw/
+data/extracted/
+data/classified/
+notebooks/.ipynb_checkpoints/
+__pycache__/
+*.pyc
+*.egg-info/
+.DS_Store
+.env

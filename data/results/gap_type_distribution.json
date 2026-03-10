@@ -1,0 +1,22 @@
+{
+  "RETURN_VALUE": {
+    "count": 94,
+    "percentage": 44.55
+  },
+  "BOUNDARY_CONDITION": {
+    "count": 60,
+    "percentage": 28.44
+  },
+  "NONE_NULL_HANDLING": {
+    "count": 32,
+    "percentage": 15.17
+  },
+  "EXCEPTION_HANDLING": {
+    "count": 15,
+    "percentage": 7.11
+  },
+  "OTHER": {
+    "count": 10,
+    "percentage": 4.74
+  }
+}

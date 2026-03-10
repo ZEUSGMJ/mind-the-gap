@@ -1,0 +1,19 @@
+{
+  "models": [
+    {
+      "model": "phi3:mini",
+      "params": "3.8B",
+      "kappa": 0.2062,
+      "n_tests": 211,
+      "agreement_pct": 40.8
+    },
+    {
+      "model": "claude-haiku-4-5-20251001",
+      "params": "Claude Haiku 4.5",
+      "kappa": 0.2135,
+      "n_tests": 211,
+      "agreement_pct": 47.9
+    }
+  ],
+  "note": "Agreement between priority rule-based AST classifier and LLM classifiers"
+}
