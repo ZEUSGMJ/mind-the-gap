@@ -7,8 +7,8 @@ Stage 2: Regression Test Extraction
 For each bug in BugsInPy, this script:
   1. Reads the bug metadata (fix commit, buggy commit, trigger test paths)
   2. Uses PyDriller to diff the fix commit against its parent
-  3. Identifies test functions that are NEW in the fix commit (not present in parent)
-  4. Extracts the full source of each new test function using the AST
+  3. Identifies trigger tests that were added or modified in the fix commit
+  4. Extracts the full source of each matched trigger test using the AST
   5. Writes one JSON file per bug to data/extracted/
 
 Output: data/extracted/{project}_{bug_id}.json
@@ -39,9 +39,8 @@ BUGSINPY_DIR = PROJECT_ROOT / "data" / "raw" / "bugsinpy"
 OUTPUT_DIR = PROJECT_ROOT / "data" / "extracted"
 
 # ---------------------------------------------------------------------------
-# Sampling: stratified across projects, target 100-150 bugs total
-# Minimum 5 bugs per project where available.
-# Adjust MAX_BUGS_PER_PROJECT and TOTAL_BUDGET as needed.
+# Convenience sample: take the first bugs by ID, capped per project, up to the
+# total budget. This is not random or stratified.
 # ---------------------------------------------------------------------------
 
 MAX_BUGS_PER_PROJECT = 15
@@ -178,8 +177,8 @@ def extract_new_test_functions(
     Use PyDriller to find test functions added or modified in fix_commit.
 
     Extracts:
-      1. Test functions that are NEW in the fix commit (not in parent)
-      2. Test functions that are MODIFIED and match known trigger function names
+      1. Test functions that are added in the fix commit (not in parent)
+      2. Test functions that are modified and match known trigger function names
       3. If neither yields results, all modified test functions in test files
 
     Returns a list of dicts with keys:

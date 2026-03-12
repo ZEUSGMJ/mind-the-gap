@@ -33,6 +33,16 @@ Expected headline counts:
 - 139 bugs with trigger tests
 - 14 projects
 
+## Figure Regeneration
+
+The committed figure set in `data/results/figures/` is generated from
+`notebooks/figures.ipynb`. After the main pipeline completes, rerun the
+notebook to refresh the PDF and PNG figure files:
+
+```bash
+jupyter nbconvert --to notebook --execute notebooks/figures.ipynb --output-dir /tmp --output figures-rerun.ipynb
+```
+
 ## Single-Bug Debugging
 
 ```bash

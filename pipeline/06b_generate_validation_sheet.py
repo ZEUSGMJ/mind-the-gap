@@ -3,7 +3,7 @@
 pipeline/06b_generate_validation_sheet.py
 
 Generates a CSV validation sheet for two independent human raters.
-Samples 15 bugs (stratified by project) and outputs one row per test
+Samples 15 bugs with broad project coverage and outputs one row per test
 with the test source, assigned classification, and empty columns for
 each rater to fill in.
 
@@ -65,8 +65,8 @@ def load_bugs_with_tests() -> list[dict]:
     return bugs
 
 
-def stratified_sample(bugs: list[dict], n: int) -> list[dict]:
-    """Sample n bugs, at least 1 per project where possible."""
+def sample_bugs_across_projects(bugs: list[dict], n: int) -> list[dict]:
+    """Sample n bugs while covering as many projects as possible."""
     by_project = {}
     for bug in bugs:
         by_project.setdefault(bug["project"], []).append(bug)
@@ -218,7 +218,7 @@ def main():
         print("No classified bugs found. Run pipeline/04_classify.py first.")
         sys.exit(1)
 
-    sample = stratified_sample(bugs, args.n)
+    sample = sample_bugs_across_projects(bugs, args.n)
     projects = sorted(set(b["project"] for b in sample))
 
     csv_path = RESULTS_DIR / "validation_sheet.csv"

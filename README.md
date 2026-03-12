@@ -69,6 +69,9 @@ inspection:
 - `data/results/manual_validation.json`
 - `data/results/figures/`
 
+The committed figure set can be regenerated from `notebooks/figures.ipynb`
+after running the main pipeline.
+
 ## Optional Reproduction Paths
 
 The LLM second-pass agreement scripts are included, but they are **not** part

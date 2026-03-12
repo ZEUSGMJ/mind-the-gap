@@ -1,6 +1,6 @@
 # Mind the Gap: Repository Snapshot
 
-**Last updated:** 2026-03-09 PT
+**Last updated:** 2026-03-12 PT
 **State:** Final analysis artifacts included, raw/intermediate data excluded from version control
 
 ---
@@ -35,7 +35,7 @@
 1. **Sampling is NOT random/stratified.** `02_extract.py` takes the first N bugs per project (up to 15). Paper must describe this accurately as a convenience sample.
 2. **STATE_TRANSITION is structurally unobservable.** Classifier only sees extracted test function bodies, not surrounding class context or file-level fixtures. Note in Threats to Validity.
 3. **BOUNDARY_CONDITION rule is broad.** Incidental literals (e.g., `insert(0, ...)`) can trigger classification. Acknowledge as heuristic limitation.
-4. **Low kappa scores.** Both LLMs over-classify as RETURN_VALUE, ignoring priority ordering. This validates why deterministic AST rules are necessary but should be discussed honestly.
+4. **Low kappa scores.** Both LLMs over-classify as RETURN_VALUE and do not reliably follow the priority ordering. This supports using deterministic AST rules, but should be discussed cautiously.
 5. **11 bugs with empty trigger_tests:** ansible_3, ansible_9, luigi_2, luigi_3, scrapy_1/6/9/11/12/13/14
 
 ## Bugs Fixed During Development
