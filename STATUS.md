@@ -63,7 +63,7 @@
 | Pipeline scripts | `pipeline/01_setup.sh` through `pipeline/05_analyze.py` (includes `03b_fix_metrics.py`) |
 | Validation scripts | `pipeline/06b_generate_validation_sheet.py`, `pipeline/06c_compute_validation_agreement.py`, `pipeline/06d_sync_validation_sheet.py` |
 | Validation data | `data/results/validation_sheet.csv`, `validation_sheet.xlsx`, `validation_answer_key.csv`, `validation_instructions.md`, `manual_validation.json` |
-| Report brief | `docs/REPORT_BRIEF.md` |
+| Methodology summary | `docs/REPORT_BRIEF.md` |
 | Repro guide | `docs/REPRODUCIBILITY.md` |
 | LLM validation note | `docs/LLM_VALIDATION.md` |
 | Kappa scripts | `pipeline/04b_classify_ollama.py`, `pipeline/04b_classify_anthropic.py` |
