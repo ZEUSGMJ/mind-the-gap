@@ -57,26 +57,19 @@ python3 pipeline/04_classify.py --bug pandas_1 --verbose
 These scripts are optional. They are not required to regenerate the main study
 artifacts.
 
-### Local Ollama path
+Two optional validation paths are supported:
 
-Prerequisites:
+- local Ollama models via `pipeline/04b_classify_ollama.py`
+- the Anthropic API via `pipeline/04b_classify_anthropic.py`
 
-- Ollama running locally at `http://localhost:11434`
-- Compatible model pulled locally, for example `phi3:mini`
+See `docs/LLM_VALIDATION.md` for the tested Ollama setup, Docker option,
+Anthropic API notes, model-selection guidance, and output details.
 
-Example:
+Quick examples:
 
 ```bash
 python3 pipeline/04b_classify_ollama.py --model phi3:mini
 ```
-
-### Anthropic API path
-
-Prerequisites:
-
-- `ANTHROPIC_API_KEY` exported in the environment
-
-Example:
 
 ```bash
 export ANTHROPIC_API_KEY=your_key_here
@@ -85,10 +78,10 @@ python3 pipeline/04b_classify_anthropic.py
 
 Notes:
 
-- Local hardware, available models, and API model availability may affect the
-  ease of reproducing the exact LLM agreement workflow.
 - The final published kappa output is already committed in
   `data/results/cohens_kappa.json`.
+- Local hardware, model availability, and API availability may affect how
+  closely a rerun matches the original optional LLM pass.
 
 ## Manual Validation Agreement
 

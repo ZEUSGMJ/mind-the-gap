@@ -89,11 +89,11 @@ Manual validation agreement can also be recomputed from the committed
 ## Documentation
 
 - `CHEATSHEET.md`: quick command reference
-- `docs/REPRODUCIBILITY.md`: detailed rerun instructions, optional LLM steps,
+- `docs/REPRODUCIBILITY.md`: detailed rerun instructions, optional LLM paths,
   and validation workflow
-- `docs/REPORT_BRIEF.md`: final methodology, numbers, limitations, and safe
-  claims
-- `docs/LLM_VALIDATION.md`: notes on the optional LLM second-pass validation
+- `docs/REPORT_BRIEF.md`: methodology and results summary for the public repo
+- `docs/LLM_VALIDATION.md`: local Ollama setup, Anthropic API notes, Docker
+  option, and `llmfit` model-selection guidance
 - `STATUS.md`: current result snapshot and repository status
 
 ## Dataset
