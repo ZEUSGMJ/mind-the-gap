@@ -34,29 +34,22 @@ Classification Scheme:
   Priority 7: OTHER
     No rule matched
 
-This script can optionally run a second-pass LLM classifier (via Anthropic API)
-to compute Cohen's kappa between the rule-based and LLM-based classifications,
-validating reproducibility without introducing human bias.
-
 Output: updates data/classified/{bug_id}.json in-place with gap_type and gap_type_priority_matched
 
 Run:
     python3 pipeline/04_classify.py
     python3 pipeline/04_classify.py --bug pandas_1 --verbose
     python3 pipeline/04_classify.py --force
-    python3 pipeline/04_classify.py --llm        # opt in to inline LLM second pass
 """
 
 import argparse
 import ast
 import json
 import logging
-import os
 import sys
 import textwrap
 from pathlib import Path
 
-import anthropic
 from tqdm import tqdm
 
 # ---------------------------------------------------------------------------
@@ -70,18 +63,7 @@ RESULTS_DIR = PROJECT_ROOT / "data" / "results"
 logging.basicConfig(level=logging.INFO, format="%(levelname)s %(message)s")
 log = logging.getLogger(__name__)
 
-GAP_TYPES = [
-    "EXCEPTION_HANDLING",
-    "BOUNDARY_CONDITION",
-    "STATE_TRANSITION",
-    "NONE_NULL_HANDLING",
-    "RETURN_VALUE",
-    "TYPE_COERCION",
-    "OTHER",
-]
-
 BOUNDARY_NUMERIC_VALUES = {0, -1}
-BOUNDARY_FLOAT_NAMES = {"inf"}
 
 # ---------------------------------------------------------------------------
 # Rule-based classifier
@@ -218,100 +200,30 @@ def _has_type_coercion(tree: ast.AST) -> bool:
 
 
 # ---------------------------------------------------------------------------
-# LLM second-pass classifier (for Cohen's kappa computation)
-# ---------------------------------------------------------------------------
-
-LLM_SYSTEM = """You are a research assistant classifying Python regression tests into semantic gap types.
-Apply the following rules in priority order. Return ONLY the gap type name, nothing else.
-
-Priority 1: EXCEPTION_HANDLING -- test uses pytest.raises, assertRaises, or with self.assertRaises
-Priority 2: BOUNDARY_CONDITION -- test inputs include 0, -1, sys.maxsize, float('inf'), float('-inf'), empty [], {}, "", b""
-Priority 3: STATE_TRANSITION -- test uses autouse fixtures or explicit setUp/tearDown
-Priority 4: NONE_NULL_HANDLING -- test inputs or assertions involve None or NaN
-Priority 5: RETURN_VALUE -- test asserts on a specific return value
-Priority 6: TYPE_COERCION -- test passes a literal of wrong type for the parameter
-Priority 7: OTHER -- none of the above
-
-Return one of: EXCEPTION_HANDLING, BOUNDARY_CONDITION, STATE_TRANSITION, NONE_NULL_HANDLING, RETURN_VALUE, TYPE_COERCION, OTHER"""
-
-
-def llm_classify(test_source: str, client: anthropic.Anthropic) -> str:
-    """Call Claude to classify a test function. Returns a gap type string."""
-    try:
-        message = client.messages.create(
-            model="claude-opus-4-5",
-            max_tokens=20,
-            system=LLM_SYSTEM,
-            messages=[{"role": "user", "content": f"Classify this test:\n\n```python\n{test_source}\n```"}],
-        )
-        result = message.content[0].text.strip().upper()
-        if result in GAP_TYPES:
-            return result
-        return "OTHER"
-    except Exception as e:
-        log.warning("LLM classification failed: %s", e)
-        return "OTHER"
-
-
-# ---------------------------------------------------------------------------
-# Cohen's Kappa
-# ---------------------------------------------------------------------------
-
-def cohens_kappa(labels_a: list[str], labels_b: list[str]) -> float:
-    """Compute Cohen's kappa between two lists of labels."""
-    if len(labels_a) != len(labels_b) or not labels_a:
-        return 0.0
-
-    n = len(labels_a)
-    categories = list(set(labels_a + labels_b))
-    k = len(categories)
-    cat_index = {c: i for i, c in enumerate(categories)}
-
-    # Observed agreement
-    po = sum(1 for a, b in zip(labels_a, labels_b) if a == b) / n
-
-    # Expected agreement
-    count_a = [0] * k
-    count_b = [0] * k
-    for a, b in zip(labels_a, labels_b):
-        count_a[cat_index[a]] += 1
-        count_b[cat_index[b]] += 1
-
-    pe = sum((count_a[i] / n) * (count_b[i] / n) for i in range(k))
-
-    if pe == 1.0:
-        return 1.0
-    return (po - pe) / (1.0 - pe)
-
-
-# ---------------------------------------------------------------------------
 # Processing
 # ---------------------------------------------------------------------------
 
-def process_bug(path: Path, force: bool, verbose: bool, llm_client=None) -> tuple[bool, list, list]:
+def process_bug(path: Path, force: bool, verbose: bool) -> bool:
     """
     Classify all trigger tests in one bug JSON.
-    Returns (was_written, rule_labels, llm_labels).
+    Returns whether the bug JSON was updated.
     """
     try:
         data = json.loads(path.read_text(encoding="utf-8"))
     except Exception as e:
         log.warning("Could not read %s: %s", path, e)
-        return False, [], []
+        return False
 
     tests = data.get("trigger_tests", [])
     if not tests:
-        return False, [], []
+        return False
 
     # Check if already classified
     already_done = all(t.get("gap_type") is not None for t in tests)
     if already_done and not force:
         if verbose:
             log.info("Skipping %s (already classified)", data["bug_id"])
-        return False, [], []
-
-    rule_labels = []
-    llm_labels = []
+        return False
 
     for test in tests:
         source = test.get("test_source", "")
@@ -320,18 +232,12 @@ def process_bug(path: Path, force: bool, verbose: bool, llm_client=None) -> tupl
         gap_type, priority = classify(source, metrics)
         test["gap_type"] = gap_type
         test["gap_type_priority_matched"] = priority
-        rule_labels.append(gap_type)
-
-        if llm_client:
-            llm_gap = llm_classify(source, llm_client)
-            test["gap_type_llm"] = llm_gap
-            llm_labels.append(llm_gap)
 
     if verbose:
         log.info("Classified %s: %s", data["bug_id"], [t["gap_type"] for t in tests])
 
     path.write_text(json.dumps(data, indent=2), encoding="utf-8")
-    return True, rule_labels, llm_labels
+    return True
 
 
 # ---------------------------------------------------------------------------
@@ -342,11 +248,6 @@ def main():
     parser = argparse.ArgumentParser(description="Stage 4: Classify semantic gap types.")
     parser.add_argument("--bug", type=str, default=None, help="Process only this bug_id")
     parser.add_argument("--force", action="store_true", help="Re-classify already classified bugs")
-    parser.add_argument(
-        "--llm",
-        action="store_true",
-        help="Run inline LLM second pass (default: off; use 04b_* scripts instead)",
-    )
     parser.add_argument("--verbose", action="store_true", help="Verbose logging")
     args = parser.parse_args()
 
@@ -366,36 +267,16 @@ def main():
             log.error("Bug '%s' not found in classified output.", args.bug)
             sys.exit(1)
 
-    llm_client = None
-    if args.llm:
-        api_key = os.environ.get("ANTHROPIC_API_KEY")
-        if api_key:
-            llm_client = anthropic.Anthropic(api_key=api_key)
-            log.info("LLM second pass enabled (claude-opus-4-5)")
-        else:
-            log.warning("ANTHROPIC_API_KEY not set. Skipping inline LLM second pass.")
-
-    all_rule_labels = []
-    all_llm_labels = []
     written = skipped = 0
 
     for path in tqdm(paths, desc="Classifying", disable=args.verbose):
-        was_written, rule_labels, llm_labels = process_bug(
-            path, force=args.force, verbose=args.verbose, llm_client=llm_client
-        )
+        was_written = process_bug(path, force=args.force, verbose=args.verbose)
         if was_written:
             written += 1
-            all_rule_labels.extend(rule_labels)
-            all_llm_labels.extend(llm_labels)
         else:
             skipped += 1
 
     log.info("Done. Written: %d, Skipped: %d", written, skipped)
-
-    # Log kappa if LLM pass ran (do not write to file; use 04b_* scripts for persistent kappa)
-    if all_rule_labels and all_llm_labels and len(all_rule_labels) == len(all_llm_labels):
-        kappa = cohens_kappa(all_rule_labels, all_llm_labels)
-        log.info("Cohen's kappa (rule vs. LLM): %.4f (not written to file; use 04b_* scripts for persistent kappa)", kappa)
 
 
 if __name__ == "__main__":

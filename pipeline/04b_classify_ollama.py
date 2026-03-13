@@ -57,7 +57,7 @@ GAP_TYPES = [
     "OTHER",
 ]
 
-# Same prompt used in 04_classify.py for the Anthropic API LLM pass
+# Same rubric used by the deterministic classifier and Anthropic validation path
 LLM_SYSTEM = """You are a research assistant classifying Python regression tests into semantic gap types.
 Apply the following rules in priority order. Return ONLY the gap type name, nothing else.
 
