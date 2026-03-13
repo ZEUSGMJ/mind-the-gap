@@ -13,7 +13,7 @@ bash pipeline/01_setup.sh               # Clone BugsInPy, verify structure
 python3 pipeline/02_extract.py          # Extract trigger tests from fix commits
 python3 pipeline/03_metrics.py          # Compute AST structural metrics
 python3 pipeline/03b_fix_metrics.py     # Compute production-side fix metrics
-python3 pipeline/04_classify.py         # Classify gap types (priority-ordered rules)
+python3 pipeline/04_classify.py         # Deterministic gap classification only
 python3 pipeline/05_analyze.py          # Stats: distribution, Mann-Whitney U, kappa
 ```
 
@@ -50,6 +50,9 @@ cat data/results/summary.txt           # Analysis summary
 python3 pipeline/04b_classify_ollama.py --model phi3:mini
 python3 pipeline/04b_classify_anthropic.py
 ```
+
+`pipeline/04b_classify_ollama.py` requires Ollama at `localhost:11434`.
+`pipeline/04b_classify_anthropic.py` requires `ANTHROPIC_API_KEY`.
 
 ## Notebooks
 

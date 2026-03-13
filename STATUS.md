@@ -53,7 +53,9 @@
 ## Reproduction Notes
 
 - The main reproducible workflow is the deterministic AST pipeline in `pipeline/01_setup.sh` through `pipeline/05_analyze.py`.
+- `pipeline/04_classify.py` is deterministic only; LLM agreement runs live in `pipeline/04b_classify_ollama.py` and `pipeline/04b_classify_anthropic.py`.
 - The LLM second-pass scripts are optional and are not required to regenerate the main study outputs.
+- The optional LLM scripts install from `requirements.txt` but still require Ollama or `ANTHROPIC_API_KEY` at runtime.
 - `data/results/` contains the final small artifacts needed for inspection without rerunning the entire study.
 
 ## File Locations

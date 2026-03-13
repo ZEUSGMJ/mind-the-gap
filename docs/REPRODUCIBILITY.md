@@ -25,6 +25,9 @@ python3 pipeline/04_classify.py
 python3 pipeline/05_analyze.py
 ```
 
+`pipeline/04_classify.py` is the deterministic classifier only. Optional LLM
+agreement runs use the separate `pipeline/04b_*` scripts.
+
 Outputs are written to `data/results/`.
 
 Expected headline counts:
@@ -61,6 +64,12 @@ Two optional validation paths are supported:
 
 - local Ollama models via `pipeline/04b_classify_ollama.py`
 - the Anthropic API via `pipeline/04b_classify_anthropic.py`
+
+The required Python packages for both optional scripts are listed in
+`requirements.txt`. Runtime prerequisites still apply:
+
+- Ollama must be running locally for `pipeline/04b_classify_ollama.py`
+- `ANTHROPIC_API_KEY` must be exported for `pipeline/04b_classify_anthropic.py`
 
 See `docs/LLM_VALIDATION.md` for the tested Ollama setup, Docker option,
 Anthropic API notes, model-selection guidance, and output details.

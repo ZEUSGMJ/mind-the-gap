@@ -47,6 +47,9 @@ python3 pipeline/04_classify.py
 python3 pipeline/05_analyze.py
 ```
 
+`pipeline/04_classify.py` is deterministic only. Optional LLM agreement runs
+are handled separately by the `pipeline/04b_*` scripts.
+
 Expected headline outputs after the full run:
 
 - `211` trigger tests
@@ -79,6 +82,12 @@ of the default rerun flow:
 
 - `pipeline/04b_classify_ollama.py` for local Ollama models
 - `pipeline/04b_classify_anthropic.py` for Anthropic API-based runs
+
+These optional scripts install from `requirements.txt`, but still need their
+runtime prerequisites:
+
+- Ollama running locally for `pipeline/04b_classify_ollama.py`
+- `ANTHROPIC_API_KEY` for `pipeline/04b_classify_anthropic.py`
 
 The final kappa output is already committed in `data/results/cohens_kappa.json`,
 so rerunning the LLM pass is optional.

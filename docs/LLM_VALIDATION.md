@@ -18,6 +18,9 @@ Available scripts:
 - `pipeline/04b_classify_ollama.py` for local Ollama models
 - `pipeline/04b_classify_anthropic.py` for the Anthropic API path
 
+The Python dependencies for both scripts are declared in `requirements.txt`.
+You still need the runtime prerequisites described below.
+
 ## Official Resources
 
 - Ollama docs: <https://docs.ollama.com/>
