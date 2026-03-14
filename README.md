@@ -18,7 +18,7 @@ project. It includes:
 - the pipeline used to extract, measure, classify, and analyze regression tests
 - the final aggregated result artifacts used in the report
 - the figure files used in the paper and slides
-- optional LLM second-pass scripts for Cohen's kappa validation
+- optional LLM second-pass scripts for classification accuracy validation
 
 This repository does **not** include the raw BugsInPy clone or large
 intermediate extraction/classification directories. Those are regenerated
@@ -35,7 +35,7 @@ source venv/bin/activate
 
 ## Main Reproduction Workflow
 
-The deterministic AST-based pipeline is the main workflow for reproducing the
+The deterministic rule-based pipeline is the main workflow for reproducing the
 study.
 
 ```bash
@@ -68,7 +68,7 @@ inspection:
 - `data/results/gap_type_distribution.json`
 - `data/results/structural_metrics.json`
 - `data/results/mann_whitney.json`
-- `data/results/cohens_kappa.json`
+- `data/results/cohens_kappa.json` (LLM agreement/accuracy results; low kappa supports need for deterministic rules)
 - `data/results/manual_validation.json`
 - `data/results/figures/`
 
@@ -89,7 +89,7 @@ runtime prerequisites:
 - Ollama running locally for `pipeline/04b_classify_ollama.py`
 - `ANTHROPIC_API_KEY` for `pipeline/04b_classify_anthropic.py`
 
-The final kappa output is already committed in `data/results/cohens_kappa.json`,
+The final LLM agreement output is already committed in `data/results/cohens_kappa.json`,
 so rerunning the LLM pass is optional.
 
 Manual validation agreement can also be recomputed from the committed
